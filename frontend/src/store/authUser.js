@@ -15,8 +15,8 @@ export const useAuthStore=create((set)=>({
 		set({ isSigningUp: true });
 		try {
 			const response = await axios.post("/api/v1/auth/signup", credentials);
-            console.log("response");
-            console.log(response);
+            // console.log("response");
+            // console.log(response);
 			set({ user: response.data.user, isSigningUp: false });
 			toast.success("Account created successfully");
 		} catch (error) {
@@ -61,6 +61,7 @@ export const useAuthStore=create((set)=>({
  const response= await axios.get("/api/v1/auth/authCheck");
  set({user:response.data.user, isCheckingAuth:false})
         }
+         // eslint-disable-next-line no-unused-vars
          catch(error)
         {
             set({isCheckingAuth:false,user:null})
