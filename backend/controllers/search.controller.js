@@ -60,11 +60,12 @@ export async function searchMovie(req, res) {
         if (response.results.length === 0) {
             return res.status(404).send(null);  // 404 not found
         }
+  
+          
 
-
-        // store in the history
+        // store in the history of the user
         await User.findByIdAndUpdate(req.user._id, {
-            $push: {
+            $push: {  
                 searchHistory: {
                     id: response.results[0].id,
                     image: response.results[0].poster_path,
@@ -75,6 +76,20 @@ export async function searchMovie(req, res) {
             },
 
         });
+
+
+    
+        //    const user = await User.findById(req.params.user_id);
+        //    if (!user.searchHistory.includes(response.results[0].id)) {
+        //        user.searchHistory.push({
+        //            id: response.results[0].id,
+        //            image: response.results[0].poster_path,
+        //            title: response.results[0].title,
+        //            searchType: "movie",
+        //            createdAt: new Date(),
+        //        });
+        //        await user.save(); // Save the updated user to the database
+        //    }
 
 
     

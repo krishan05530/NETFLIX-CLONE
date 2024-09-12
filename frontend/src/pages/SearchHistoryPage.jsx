@@ -29,6 +29,7 @@ const SearchHistoryPage = () => {
 			try {
 				const res = await axios.get(`/api/v1/search/history`);
 				setSearchHistory(res.data.content);
+			// eslint-disable-next-line no-unused-vars
 			} catch (error) {
 				setSearchHistory([]);
 			}
@@ -40,6 +41,7 @@ const SearchHistoryPage = () => {
 		try {
 			await axios.delete(`/api/v1/search/history/${entry.id}`);
 			setSearchHistory(searchHistory.filter((item) => item.id !== entry.id));
+		// eslint-disable-next-line no-unused-vars
 		} catch (error) {
 			toast.error("Failed to delete search item");
 		}

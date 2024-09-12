@@ -1,6 +1,8 @@
 // const express=require('express');  // commonJS
 import express from 'express'; //  to use this we types  "type": "module" in pacage.json file
 
+
+
 // now we dont need to use this line const express=require('express');
 import authRoutes from "./routes/auth.route.js"
 import movieRoutes from "./routes/movie.route.js"
@@ -11,12 +13,17 @@ import {protectRoute} from './middleware/protectRoute.js';
 import { ENV_VARS } from './config/envVars.js';
 import { connectDB } from './config/db.js';
 import cookieParser from 'cookie-parser';
-
+ 
+// step1 of deployemnt
+import path from "path";
 
 
 // creating app
 const app = express();
 const PORT = ENV_VARS.PORT
+
+// 2nd setp
+const __dirname=path.resolve();
 
 app.use(express.json()); // will allow parse to req.body
 app.use(cookieParser());  // so that we can parse/fetch the cookie , used in protectRoute middleware
@@ -27,8 +34,25 @@ app.use("/api/v1/tv",protectRoute ,tvRoutes);
 app.use("/api/v1/search",protectRoute ,searchRoutes);
 
 
+ 
+ // 3rd step , before it run npm run build , to get the dist folder
+//  if(ENV_VARS.NODE_ENV==="production")
+//  {
+//   // it will make dist file our static assets , _direname is root , then from their we go to frontend -> dist
+// app.use(express.static(path.join(__dirname,"/frontend/dist")));
+// // if we hit anyother route than upper one then hit this repsonse
+// app.get("*",(req,res)=>{
+//   res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))  // this is the path till index.html
+// })
+//  }
 
+ if (ENV_VARS.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
+}
 
 app.listen(PORT, () => {
   console.log("server started at" + PORT);
