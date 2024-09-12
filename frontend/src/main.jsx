@@ -13,3 +13,7 @@ createRoot(document.getElementById('root')).render(
   
   </StrictMode> 
 )
+
+
+// npm run build  to start it , as it will install node module 
+// npm run start as we are in production  
