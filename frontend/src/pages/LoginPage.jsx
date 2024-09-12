@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
  
 
-  const {login}=useAuthStore();
+  const {login,isLoggingIn}=useAuthStore();
 
   const handleLogin=(e)=>{
     e.preventDefault();
@@ -66,8 +66,11 @@ export default function LoginPage() {
 
             </div>
            
-           <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md">
-            Login 
+           <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md"
+             disabled={isLoggingIn}>
+           {
+            isLoggingIn ? "Loading":" Login "
+           }
            </button>
 
             

@@ -13,9 +13,10 @@ const SignUpPage = () => {
   const [email, setEmail] = useState(emailValue || " ");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+ 
 
 // useAuthStore to get signup function in this file
- const {signup}= useAuthStore();   // now call this fnc with credentil
+ const {signup,isSigningUp}= useAuthStore();   // now call this fnc with credentil
 
 
 
@@ -91,8 +92,11 @@ const SignUpPage = () => {
 
             </div>
            
-           <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md">
-            sign up
+           <button className="w-full py-2 bg-red-600 text-white font-semibold rounded-md"
+            disabled={isSigningUp}>
+                   {
+                    isSigningUp  ? "Loading..." :"Sign Up"
+                   }
            </button>
 
             
