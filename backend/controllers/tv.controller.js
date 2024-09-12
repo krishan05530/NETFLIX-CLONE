@@ -37,7 +37,7 @@ res.json({
 }
 catch(error)
 {
-  if(error.message.include("404")){     // if we dont find anything return null
+  if(error.message.includes("404")){     // if we dont find anything return null
     return res.status(404).send(null);
   }
 
@@ -58,7 +58,7 @@ export async function getTvDetails(req,res) {
   }
   catch(error)
   {
-    if(error.message.include("404")){     // if we dont find anything return null
+    if(error.message.includes("404")){     // if we dont find anything return null
       return res.status(404).send(null);
     }
 
@@ -74,7 +74,7 @@ export async function getSimilarTvs(req,res) {
   try{
     const data =await fetchFromTMDB(`https://api.themoviedb.org/3/tv/${id}/similar?language=en-US&page=1`)
     res.status(200).json({
-      success:true, content:data
+      success:true, similar:data.results
      })
 
   }

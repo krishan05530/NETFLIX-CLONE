@@ -33,7 +33,7 @@ res.json({
 }
 catch(error)
 {
-  if(error.message.include("404")){     // if we dont find anything return null
+  if(error.message.includes("404")){     // if we dont find anything return null
     return res.status(404).send(null);
   }
 
@@ -48,13 +48,13 @@ export async function getMovieDetails(req,res) {
   try{
     const data =await fetchFromTMDB(`https://api.themoviedb.org/3/movie/${id}?language=en-US`)
     res.status(200).json({
-     success:true, content:data
+     success:true, content:data  // we will get res.data.content in frontedn
     })
 
   }
   catch(error)
   {
-    if(error.message.include("404")){     // if we dont find anything return null
+    if(error.message.includes("404")){     // if we dont find anything return null
       return res.status(404).send(null);
     }
 
@@ -70,7 +70,7 @@ export async function getSimilarMovies(req,res) {
   try{
     const data =await fetchFromTMDB(`https://api.themoviedb.org/3/movie/${id}/similar?language=en-US&page=1`)
     res.status(200).json({
-      success:true, content:data
+      success:true, similar:data.results
      })
 
   }

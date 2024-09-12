@@ -3,19 +3,47 @@ import Navbar from "../../components/Navbar";
 import { Play } from "lucide-react"
 import { Info } from "lucide-react";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
-import { ORIGINAL_IMG_BASE_URL } from "../../utils/constants";
+import { MOVIE_CATEGORIES, TV_CATEGORIES,ORIGINAL_IMG_BASE_URL } from "../../utils/constants";
+import { useContentStore } from "../../store/content";
+import MovieSlider from "../../components/MovieSlider";
+import { useState } from "react";
+
+
 export default function HomeScreen() {
   const { trendingContent } = useGetTrendingContent();
   console.log("trendingContent", trendingContent);
+   const [imgLoading,setImgLoading]=useState(true);
+
+  const {contentType}=useContentStore();
 
   // TODO Add a loading spinner
+  if(!trendingContent)return (
+   <div className="h-screen text-white relative">
+    <Navbar/>
+    <div
+     className="absolute top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center -z-10 
+     shimmer"/>
+   </div>
+  )
   return (
     <>
       <div className='relative h-screen text-white '>
         <Navbar />
 
-        <img src={ORIGINAL_IMG_BASE_URL + trendingContent?.backdrop_path} alt="Hero img"
-          className='absolute top-0 left-0 w-full h-full object-cover -z-50' />
+
+     {/* cool optimization hack for img */}
+     {/*  while imageloading the loader is onn */}
+     {imgLoading && (
+      <div
+      className="absolute top-0 left-0 w-full h-full bg-black/70 flex justify-center items-center -z-10 
+      shimmer"/>
+     )}
+        <img src={ORIGINAL_IMG_BASE_URL + trendingContent?.backdrop_path} 
+        alt="Hero img"
+         className='absolute top-0 left-0 w-full h-full object-cover -z-50'
+         onLoad={()=>{
+          setImgLoading(false);
+         }} />
 
         <div className='absolute top-0 left-0 w-full h-full bg-black/50 -z-50' aria-hidden='true' />
 
@@ -64,7 +92,14 @@ export default function HomeScreen() {
         </div>
         </div>
       </div>
-
+  
+  <div className="flex flex-col gap-10 bg-black py-10">
+       {
+       contentType==="movie" ? 
+       ( MOVIE_CATEGORIES.map((category)=><MovieSlider key={category} category={category}/>))
+        :(TV_CATEGORIES.map((category)=><MovieSlider key={category} category={category}/>))
+       }
+  </div>
     </>
 
   )
