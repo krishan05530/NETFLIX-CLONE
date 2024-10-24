@@ -57,3 +57,4 @@ export default App
 
 // go to frontend and then run in terminal
 // npm run build  :-> it will give us a dist folder , in frontend folder
+// npm run start  ;->to see it in dev mode and see chnages in live 

@@ -16,3 +16,4 @@ router.get("/:id/similar",getSimilarMovies);  // on the basied on id iwill get t
 router.get("/:category",getMovieByCategory);  // on the basied on id iwill get the speific trailer video
 
 export default router;
+// /api/v1/movie/:id/similar

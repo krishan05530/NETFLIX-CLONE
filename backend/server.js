@@ -7,8 +7,8 @@ import express from 'express'; //  to use this we types  "type": "module" in pac
 import authRoutes from "./routes/auth.route.js"
 import movieRoutes from "./routes/movie.route.js"
 import searchRoutes from "./routes/search.route.js"
-
 import tvRoutes from "./routes/tv.route.js"
+
 import {protectRoute} from './middleware/protectRoute.js';
 import { ENV_VARS } from './config/envVars.js';
 import { connectDB } from './config/db.js';
@@ -35,14 +35,14 @@ app.use("/api/v1/search",protectRoute ,searchRoutes);
 
 
  
- // 3rd step , before it run npm run build , to get the dist folder
+ // 3rd step , before it, go to frontend folder and  run : npm run build , to get the dist folder
 //  if(ENV_VARS.NODE_ENV==="production")
 //  {
 //   // it will make dist file our static assets , _direname is root , then from their we go to frontend -> dist
 // app.use(express.static(path.join(__dirname,"/frontend/dist")));
 // // if we hit anyother route than upper one then hit this repsonse
 // app.get("*",(req,res)=>{
-//   res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))  // this is the path till index.html
+//   res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"))  // this is the path till index.html in frontend
 // })
 //  }
 
@@ -85,7 +85,7 @@ app.listen(PORT, () => {
 
 
 // learning in tmdb server
-// bearer <toke>  there shold be space after Bearer oterwise it will give error
+// bearer <token>  there shold be space after Bearer oterwise it will give error
 
 
 
@@ -102,3 +102,9 @@ app.listen(PORT, () => {
 // start use npm run dev
 
 
+/*
+
+
+
+user-> click on button -> request to server -> server will check if user is authenticated or not -> if yes then it will send the data to user
+*/

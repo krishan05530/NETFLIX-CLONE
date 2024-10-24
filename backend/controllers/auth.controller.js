@@ -166,7 +166,7 @@ export async function logout(req, res) {
     }
 }
 
-
+// Your authCheck function looks like a basic controller that checks authentication status and returns user details if the user is authenticated. 
 export async function authCheck(req,res) {
     try{
         console.log("req.user", req.user);
