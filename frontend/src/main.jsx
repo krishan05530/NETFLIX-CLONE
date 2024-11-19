@@ -63,7 +63,7 @@ to initiale the git be in root folder and run this command
 git init
 git add .
 git commit -m "initial commit"
-
+git push
 */
 /*
 we are using render.com to deploy our app

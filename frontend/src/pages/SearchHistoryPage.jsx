@@ -27,6 +27,7 @@ const SearchHistoryPage = () => {
 	useEffect(() => {
 		const getSearchHistory = async () => {
 			try {
+				// end point to get search history is getting called /api/v1/search/history
 				const res = await axios.get(`/api/v1/search/history`);
 				setSearchHistory(res.data.content);
 			// eslint-disable-next-line no-unused-vars
